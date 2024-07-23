@@ -30,7 +30,7 @@ export default function EditProfile() {
       <View style={styles.icons}>
         <View
           style={{
-            backgroundColor: "grey",
+            backgroundColor: "#ddd9d9",
             width: 150,
             height: 150,
             borderRadius: 80,

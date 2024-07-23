@@ -25,7 +25,7 @@ export default function ProfileScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.user}>
-        <View style={{ alignItems: "center", paddingTop: 30 }}>
+        <View style={{ alignItems: "center", paddingTop: 20 }}>
           <View
             style={{
               backgroundColor: "grey",
@@ -37,12 +37,14 @@ export default function ProfileScreen({ navigation }) {
             <FontAwesome5 name="user-alt" size={60} color="black" />
           </View>
           <Text style={{ fontSize: 23, fontWeight: "bold" }}>John Doe</Text>
-          <Text style={{  top:5,fontSize: 23, fontWeight: "300" }}>Johndoe@anoni.com</Text>
-          <View style={{ padding:3, width: "95%", top: 5,  justifyContent:"center",alignSelf:"centre"}}>
+          <Text style={{  top:3,fontSize: 23, fontWeight: "300" }}>Johndoe@anoni.com</Text>
+          <View style={{ padding:3, width: "45%", top: 5,  justifyContent:"center",alignSelf:"center"}}>
+            <View style ={{ alignContent: "center", alignSelf: "center"}}>
+
             <TouchableOpacity
-              style={{backgroundColor: "#8282fa",padding:13,marginStart: 15, borderRadius: 30, }}
+              style={{backgroundColor: "#8282fa",padding:13,marginStart: 15, borderRadius: 30, justifyContent: "center"}}
               activeOpacity={0.2}
-              onPress={() => setVisibility(true)}
+              onPress={() =>  navigation.navigate("EditProfile")}
             >
               <Text
                 style={{
@@ -53,10 +55,11 @@ export default function ProfileScreen({ navigation }) {
                   
                 }}
               >
-                Upgrade to PRO!
+                Edit Profile
               </Text>
             </TouchableOpacity>
           
+            </View>
           </View>
         </View>
 
@@ -118,10 +121,10 @@ export default function ProfileScreen({ navigation }) {
               <Text style={styles.profileListText}>Settings</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.listBtn} activeOpacity="0.5"  onPress={() => navigation.navigate("EditProfile")}>
+          <TouchableOpacity style={styles.listBtn} activeOpacity="0.5"  onPress={() => setVisibility(true)}>
             <View style={styles.profileList}>
-            <FontAwesome5 name="user-edit" size={24} color="black" />
-              <Text style={styles.profileListText}>Edit Profile</Text>
+            <MaterialIcons name="upgrade" size={30} color="black" />
+              <Text style={styles.profileListText}>Upgrade to PRO</Text>
             </View>
           </TouchableOpacity>
         
@@ -191,6 +194,8 @@ const styles = StyleSheet.create({
     width: "95%",
     flex: 1,
     alignSelf: "center",
+    alignContent: "center",
+
   },
   btn: {
     // backfaceVisibility: "visible",
