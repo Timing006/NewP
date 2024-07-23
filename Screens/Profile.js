@@ -1,81 +1,229 @@
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView} from 'react-native'
-import { FontAwesome5, MaterialCommunityIcons, FontAwesome, Ionicons, EvilIcons, MaterialIcons, AntDesign} from '@expo/vector-icons';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  Modal,
+  Pressable,
+} from "react-native";
+import { useState } from "react";
+import {
+  FontAwesome5,
+  MaterialCommunityIcons,
+  FontAwesome,
+  Ionicons,
+  EvilIcons,
+  MaterialIcons,
+  AntDesign,
+  FontAwesome6,
+} from "@expo/vector-icons";
 
-export default function ProfileScreen({navigation}) {
+export default function ProfileScreen({ navigation }) {
+  const [visibility, setVisibility] = useState(false)
+
   return (
     <View style={styles.container}>
-      <View style={ styles.user}>
-
-        <View style= {{alignItems: "center", paddingTop:30}}>
-            <View style={{backgroundColor: "grey", padding: 25, borderRadius: 55, marginBottom: 15}}>
-              <FontAwesome5 name="user-alt" size={60} color="black" />
-            </View>
-            <Text style= {{fontSize: 23, fontWeight: "bold"}}>John Doe</Text>
-            <TouchableOpacity style={styles.btn} activeOpacity={0.4} onPress={() => navigation.navigate("EditProfile")}>
-                <Text style={{fontSize:17}}>Edit Profile</Text>
-                <MaterialCommunityIcons name="account-edit" size={24} color="black" />
+      <View style={styles.user}>
+        <View style={{ alignItems: "center", paddingTop: 30 }}>
+          <View
+            style={{
+              backgroundColor: "grey",
+              padding: 25,
+              borderRadius: 55,
+              marginBottom: 15,
+            }}
+          >
+            <FontAwesome5 name="user-alt" size={60} color="black" />
+          </View>
+          <Text style={{ fontSize: 23, fontWeight: "bold" }}>John Doe</Text>
+          <Text style={{  top:5,fontSize: 23, fontWeight: "300" }}>Johndoe@anoni.com</Text>
+          <View style={{ padding:3, width: "95%", top: 5,  justifyContent:"center",alignSelf:"centre"}}>
+            <TouchableOpacity
+              style={{backgroundColor: "#8282fa",padding:13,marginStart: 15, borderRadius: 30, }}
+              activeOpacity={0.2}
+              onPress={() => setVisibility(true)}
+            >
+              <Text
+                style={{
+                  fontSize: 25,
+                  // fontFamily: " Manrope_600SemiBold ",
+                  color: "white",
+                  alignSelf: "center"
+                  
+                }}
+              >
+                Upgrade to PRO!
+              </Text>
             </TouchableOpacity>
+          
+          </View>
         </View>
+
+
+       {/* MODAL */}
+        <Modal
+          visible={visibility}
+          transparent={true}
+          animationType="fade"
+        >
+          
+          <View style={styles.modalView}>
+          <ScrollView>
+            <View style = {styles.modalContent}>
+            <Ionicons name="construct" size={24} color="black" style = {{alignSelf:"center"}}/>
+
+            <Text style={{fontFamily: "Pacifico_400Regular"}}>Under Construction</Text>
+            <TouchableOpacity onPress={()=>setVisibility(false)}  style={{top:70, padding:15, backgroundColor:"#8282fa",  justifyContent:"center", alignSelf:"centre",  borderRadius: 15}}>
+              <Text style={{color:"#fff",justifyContent: "center", alignContent:"center"}}>Close Page</Text>
+            </TouchableOpacity>
+            </View>
+          </ScrollView>
+            <View style={styles.modalHeader}></View>
+          </View>
+        </Modal>
+
+
+
       </View>
-      <View style={{backgroundColor:"white", flex: 1.9, borderTopStartRadius: 35, borderTopEndRadius: 35}}>
-        <ScrollView style={{width: "90%", alignSelf: "center", flex:1}}>
+      <View
+        style={{
+          backgroundColor: "white",
+          flex: 1.9,
+          borderTopStartRadius: 35,
+          borderTopEndRadius: 35,
+        }}
+      >
+        <ScrollView
+          style={{ width: "90%", alignSelf: "center", flex: 1 }}
+          showsVerticalScrollIndicator="false"
+          horizontal="false"
+        >
+           <TouchableOpacity style={styles.listBtn} activeOpacity="0.5">
             <View style={styles.profileList}>
-                <FontAwesome name="history" size={24} color="black" />
-                <Text  style={styles.profileListText}>Order History</Text>
+            <MaterialIcons name="privacy-tip" size={24} color="black" />
+              <Text style={styles.profileListText}>Privacy</Text>
+              {/* <AntDesign name="rightcircleo" size={24} color="#5b4646"/> */}
             </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.listBtn} activeOpacity="0.5">
             <View style={styles.profileList}>
-                <Ionicons name="notifications-circle-outline" size={24} color="black" />
-                <Text style={styles.profileListText}>Notification</Text>
+              <FontAwesome name="history" size={24} style={styles.icons} />
+              <Text style={styles.profileListText}>Purchase History</Text>
             </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.listBtn} activeOpacity="0.5">
             <View style={styles.profileList}>
-                <EvilIcons name="credit-card" size={24} color="black" />
-                <Text style={styles.profileListText}>Cards</Text>
+            <AntDesign name="setting" size={24} color="black" />
+              <Text style={styles.profileListText}>Settings</Text>
             </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.listBtn} activeOpacity="0.5"  onPress={() => navigation.navigate("EditProfile")}>
             <View style={styles.profileList}>
-                <FontAwesome name="flag-o" size={24} color="black" />
-                <Text style={styles.profileListText}>Country</Text>
+            <FontAwesome5 name="user-edit" size={24} color="black" />
+              <Text style={styles.profileListText}>Edit Profile</Text>
             </View>
+          </TouchableOpacity>
+        
+          <TouchableOpacity style={styles.listBtn} activeOpacity="0.5">
             <View style={styles.profileList}>
-                <MaterialIcons name="password" size={24} color="black" />
-                <Text style={styles.profileListText}>Change Password</Text>
+              <EvilIcons
+                name="credit-card"
+                size={33}
+                color="black"
+                style={styles.icons}
+              />
+              <Text style={styles.profileListText}>Cards</Text>
             </View>
+          </TouchableOpacity>
+         
+
+         
+          <TouchableOpacity style={styles.listBtn} activeOpacity="0.5">
             <View style={styles.profileList}>
-                <AntDesign name="customerservice" size={24} color="black" />
-                <Text style={styles.profileListText}>Customer Care</Text>
+              <FontAwesome6
+                name="map-location"
+                size={24}
+                color="black "
+                style={styles.icons}
+              />
+              <Text style={styles.profileListText}>Track Package</Text>
             </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.listBtn} activeOpacity="0.5">
+            <View style={styles.profileList}>
+              <MaterialIcons
+                name="password"
+                size={24}
+                color="black"
+                style={styles.icons}
+              />
+              <Text style={styles.profileListText}>Change Password</Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.listBtn} activeOpacity="0.5">
+            <View style={styles.profileList}>
+              <AntDesign
+                name="customerservice"
+                size={24}
+                color="black"
+                style={styles.icons}
+              />
+              <Text style={styles.profileListText}>Customer Care</Text>
+            </View>
+          </TouchableOpacity>
         </ScrollView>
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#e9e6e6", 
-    },
-    user: {
-        width: "95%",
-        flex:1,
-        alignSelf: "center"
+  container: {
+    backgroundImage: "",
+    flex: 1,
+    fontFamily: "600SemiBold",
 
-    }, 
-    btn:{
-        // backgroundColor:"#3131dd",
-        padding:10,
-        borderRadius:370,
-        flexDirection: "row",
-       alignItems: "center",
-       gap: 7
-    },
-    profileList: {
-        flexDirection:"row",
-        // flex: 1,
-        alignItems: "center", 
-        gap: 20,
-        height:70
-    },
-    profileListText: {
-        fontSize: 17
-    }
-})
+    backgroundColor: "transparent",
+  },
+  user: {
+    width: "95%",
+    flex: 1,
+    alignSelf: "center",
+  },
+  btn: {
+    // backfaceVisibility: "visible",
+    //    width: "95%",
+    padding: 10,
+    // borderRadius:370,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 7,
+  },
+  profileList: {
+    flexDirection: "row",
+    // flex: 1,
+    alignItems: "center",
+    gap: 20,
+    height: 70,
+    width: "100%",
+  },
+  profileListText: {
+    fontSize: 17,
+  },
+  // icons: {
+  //   color: "#040000",
+  // },
+  modalView:{
+    backgroundColor: "#e9e6e6",
+    height: "43%",
+    borderBottomEndRadius: 30, 
+    borderBottomStartRadius:30
+  }, 
+  modalContent:{
+    top:40,
+    alignSelf: "center",
+    justifyContent: "center"
+  }
+});

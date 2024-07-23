@@ -12,7 +12,6 @@ export default function StackNavigator() {
         component={ProfileScreen}
         options={{ headerStyle: { backgroundColor: "white" } }}
       />
-      {/* <Stack.Screen name="" component={} /> */}
       <Stack.Screen
         name="EditProfile"
         component={EditProfile}
